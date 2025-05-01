@@ -67,10 +67,16 @@ namespace DisarmedProtection
         [Description("Hint a player will receive, if they try to disarm a player over an allowed limit.")]
         public string DisarmLimitMessage { get; set; } = "You have reached the maximum limit of players you can disarm.";
 
-        [Description("Can anyone release the Disarmed (true) or only the Disarmer (false)?")]
+        [Description("Can players disarmed via RA console be released by other players?")]
+        public bool RaDisarmedRelease { get; set; } = true;
+
+        [Description("Can disarmed player be released by anyone (true) or only their Disarmer (false)?")]
         public bool AnyoneRelease { get; set; } = false;
 
-        [Description("Hint a player will receive, if they try to release Disarmed while not being a Disarmer and above being false.")]
+        [Description("Hint a player will receive, if releasing fails.")]
         public string ReleaseFailMessage { get; set; } = "You can't release any player you haven't disarmed.";
+
+        [Description("Should SCP-3114 be protected, if protection applies to disguised role?")]
+        public bool DisguiseProtection { get; set; } = true;
     }
 }
