@@ -77,6 +77,9 @@ namespace DisarmedProtection
         public string ReleaseFailMessage { get; set; } = "You can't release any player you haven't disarmed.";
 
         [Description("Should SCP-3114 be protected, if protection applies to disguised role?")]
-        public bool DisguiseProtection { get; set; } = true;
+        public bool DisguiseProtection { get; set; } = false;
+
+        [Description("Should protection apply on servers with Friendly Fire enabled?")]
+        public bool ProtectionOnFf { get; set; } = false;
     }
 }

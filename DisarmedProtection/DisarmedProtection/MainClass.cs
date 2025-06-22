@@ -15,6 +15,7 @@ using Utils.NonAllocLINQ;
 using PlayerStatsSystem;
 using PlayerRoles.PlayableScps.Scp3114;
 using PlayerRoles;
+using LabApi.Features.Wrappers;
 
 namespace DisarmedProtection
 {
@@ -47,8 +48,9 @@ namespace DisarmedProtection
         public void OnPlayerHurting(PlayerHurtingEventArgs ev)
         {
             RoleTypeId role = ev.Player.RoleBase is Scp3114Role skeleton && Config.DisguiseProtection ? skeleton.CurIdentity.StolenRole : ev.Player.Role;
-            if (ev.DamageHandler is not Scp018DamageHandler
-            && ev.Player.IsDisarmed && ev.Attacker.IsHuman
+            if ((!Server.FriendlyFire || Config.ProtectionOnFf)
+            && ev.DamageHandler is not Scp018DamageHandler
+            && ev.Player.IsDisarmed && ev.Attacker != null && ev.Attacker.IsHuman
             && Config.ProtectedRoles.TryGetValue(role, out var settings)
             && settings.TryGetValue(ev.Attacker.Team, out List<FacilityZone> zones)
             && zones.Contains(ev.Player.Zone)
