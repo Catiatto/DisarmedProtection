@@ -23,4 +23,5 @@ Place *DisarmedProtection* dll in "...\AppData\Roaming\SCP Secret Laboratory\Lab
 |ra_disarmed_release|Can players disarmed via RA console be released by other players?|bool|true|
 |anyone_release|Can anyone release the Disarmed (true) or only the Disarmer (false)?|bool|false|
 |release_fail_message|Hint a player will receive, if they try to release Disarmed while not being a Disarmer and above being false.|string|You can't release any player you haven't disarmed.|
-|disguise_protection|Should SCP-3114 be protected, if protection applies to disguised role?|bool|true|
+|disguise_protection|Should SCP-3114 be protected, if protection applies to disguised role?|bool|false|
+|protection_on_ff|Should protection apply on servers with Friendly Fire enabled?|bool|false|
