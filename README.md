@@ -1,4 +1,4 @@
-# DisarmedProtection (1.0.3)
+# DisarmedProtection (1.0.4)
 Plugin for the "SCP: Secret Laboratory" game, that allows disarmed players to be protected from certain teams in certain zones.
 
 ## Features
