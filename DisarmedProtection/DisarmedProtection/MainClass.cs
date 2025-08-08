@@ -10,12 +10,12 @@ using LabApi.Events.Handlers;
 using LabApi.Features;
 using Log = LabApi.Features.Console.Logger;
 using LabApi.Loader.Features.Plugins;
+using LabApi.Features.Wrappers;
 using MapGeneration;
 using Utils.NonAllocLINQ;
 using PlayerStatsSystem;
 using PlayerRoles.PlayableScps.Scp3114;
 using PlayerRoles;
-using LabApi.Features.Wrappers;
 
 namespace DisarmedProtection
 {
@@ -51,12 +51,12 @@ namespace DisarmedProtection
             if ((!Server.FriendlyFire || Config.ProtectionOnFf)
             && ev.DamageHandler is not Scp018DamageHandler
             && ev.Player.IsDisarmed && ev.Attacker != null && ev.Attacker.IsHuman
-            && Config.ProtectedRoles.TryGetValue(role, out var settings)
+            && Config.ProtectedRoles != null && Config.ProtectedRoles.TryGetValue(role, out var settings)
             && settings.TryGetValue(ev.Attacker.Team, out List<FacilityZone> zones)
             && zones.Contains(ev.Player.Zone)
-            && (Config.ProtectionDistance <= 0 || (ev.Player.Position - ev.Player.DisarmedBy.Position).sqrMagnitude <= Config.ProtectionDistance))
+            && (Config.ProtectionDistance <= 0 || ev.Player.DisarmedBy != null && (ev.Player.Position - ev.Player.DisarmedBy.Position).sqrMagnitude <= Config.ProtectionDistance))
             {
-                Log.Debug($"Player {ev.Player.Nickname} ({ev.Player.Role}) is protected against damage from player {ev.Attacker.Nickname} ({ev.Player.Team}) in {ev.Player.Room.Zone} zone.", Config.Debug);
+                Log.Debug($"Player {ev.Player.Nickname} ({ev.Player.Role}) is protected against damage from player {ev.Attacker.Nickname} ({ev.Attacker.Team}) in {ev.Player.Room.Zone} zone.", Config.Debug);
                 ev.IsAllowed = false;
             }
         }
@@ -74,8 +74,8 @@ namespace DisarmedProtection
 
         public override string Name { get; } = "DisarmedProtection";
         public override string Description { get; } = null;
-        public override string Author { get; } = "Phineapple18";
-        public override Version Version { get; } = new(1, 0, 3);
+        public override string Author { get; } = "Catiatto";
+        public override Version Version { get; } = new(1, 0, 4);
         public override Version RequiredApiVersion { get; } = new(LabApiProperties.CompiledVersion);
     }
 }
