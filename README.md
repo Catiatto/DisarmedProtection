@@ -1,4 +1,4 @@
-# DisarmedProtection (1.0.4)
+# DisarmedProtection (1.0.5)
 Plugin for the "SCP: Secret Laboratory" game, that allows disarmed players to be protected from certain teams in certain zones.
 
 ## Features
@@ -16,7 +16,7 @@ Place *DisarmedProtection* dll in "...\AppData\Roaming\SCP Secret Laboratory\Lab
 |Name|Description|Type|Default value|
 |---|---|---|---|
 |debug|Should debug be enabled?|bool|false|
-|protected_roles|Roles that, if disarmed, won't take damage from certain teams in certain zones.|Dictionary<RoleTypeId, Dictionary<Team, List\<FacilityZone>>>|ClassD:<br/>&nbsp;&nbsp;Scientists:<br/>&nbsp;&nbsp;&nbsp;- LightContainment<br/>&nbsp;&nbsp;&nbsp;- HeavyContainment<br/>&nbsp;&nbsp;&nbsp;- Entrance<br/>&nbsp;&nbsp;&nbsp;- Surface<br/>&nbsp;&nbsp;FoundationForces:<br/>&nbsp;&nbsp;&nbsp;- Entrance<br/>Scientists:<br/>&nbsp;&nbsp;ChaosInsurgency:<br/>&nbsp;&nbsp;&nbsp;- Entrance<br/>&nbsp;&nbsp;&nbsp;- Surface|
+|protected_roles|Roles that, if disarmed, won't take damage from certain teams in certain zones.|Dictionary<RoleTypeId, Dictionary<Team, HashSet\<FacilityZone>>>|ClassD:<br/>&nbsp;&nbsp;Scientists:<br/>&nbsp;&nbsp;&nbsp;- LightContainment<br/>&nbsp;&nbsp;&nbsp;- HeavyContainment<br/>&nbsp;&nbsp;&nbsp;- Entrance<br/>&nbsp;&nbsp;&nbsp;- Surface<br/>&nbsp;&nbsp;FoundationForces:<br/>&nbsp;&nbsp;&nbsp;- Entrance<br/>Scientists:<br/>&nbsp;&nbsp;ChaosInsurgency:<br/>&nbsp;&nbsp;&nbsp;- Entrance<br/>&nbsp;&nbsp;&nbsp;- Surface|
 |protection_distance|Maximum distance between Disarmer and Disarmed where the protection works. Set to 0 or below to disable.|float|5f|
 |disarm_limit|How many people can 1 person disarm? Set to 0 or below to disable.|int|2|
 |disarm_limit_message|Hint a player will receive, if they try to disarm a player over an allowed limit.|string|You have reached the maximum limit of players you can disarm.|
