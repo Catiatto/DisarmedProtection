@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Log = LabApi.Features.Console.Logger;
+
 using InventorySystem.Disarming;
 using LabApi.Events.Arguments.PlayerEvents;
 using LabApi.Events.Handlers;
 using LabApi.Features;
-using Log = LabApi.Features.Console.Logger;
-using LabApi.Loader.Features.Plugins;
 using LabApi.Features.Wrappers;
+using LabApi.Loader.Features.Plugins;
 using MapGeneration;
-using Utils.NonAllocLINQ;
-using PlayerStatsSystem;
-using PlayerRoles.PlayableScps.Scp3114;
 using PlayerRoles;
+using PlayerRoles.PlayableScps.Scp3114;
+using PlayerStatsSystem;
+using Utils.NonAllocLINQ;
 
 namespace DisarmedProtection
 {
@@ -52,7 +53,7 @@ namespace DisarmedProtection
             && ev.DamageHandler is not Scp018DamageHandler
             && ev.Player.IsDisarmed && ev.Attacker != null && ev.Attacker.IsHuman
             && Config.ProtectedRoles != null && Config.ProtectedRoles.TryGetValue(role, out var settings)
-            && settings.TryGetValue(ev.Attacker.Team, out List<FacilityZone> zones)
+            && settings.TryGetValue(ev.Attacker.Team, out HashSet<FacilityZone> zones)
             && zones.Contains(ev.Player.Zone)
             && (Config.ProtectionDistance <= 0 || ev.Player.DisarmedBy != null && (ev.Player.Position - ev.Player.DisarmedBy.Position).sqrMagnitude <= Config.ProtectionDistance))
             {
@@ -75,7 +76,7 @@ namespace DisarmedProtection
         public override string Name { get; } = "DisarmedProtection";
         public override string Description { get; } = null;
         public override string Author { get; } = "Catiatto";
-        public override Version Version { get; } = new(1, 0, 4);
+        public override Version Version { get; } = new(1, 0, 5);
         public override Version RequiredApiVersion { get; } = new(LabApiProperties.CompiledVersion);
     }
 }

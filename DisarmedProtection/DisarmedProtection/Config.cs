@@ -17,15 +17,13 @@ namespace DisarmedProtection
         public bool Debug { get; set; } = false;
 
         [Description("Roles that, if disarmed, won't take damage from certain teams in certain zones.")]
-        public Dictionary<RoleTypeId, Dictionary<Team, List<FacilityZone>>> ProtectedRoles { get; set; } = new()
+        public Dictionary<RoleTypeId, Dictionary<Team, HashSet<FacilityZone>>> ProtectedRoles { get; set; } = new()
         {
             {
-                RoleTypeId.ClassD,
-                new()
+                RoleTypeId.ClassD, new()
                 {
                     {
-                        Team.Scientists,
-                        new()
+                        Team.Scientists, new()
                         {
                             FacilityZone.LightContainment,
                             FacilityZone.HeavyContainment,
@@ -34,8 +32,7 @@ namespace DisarmedProtection
                         }
                     },
                     {
-                        Team.FoundationForces,
-                        new()
+                        Team.FoundationForces, new()
                         {
                             FacilityZone.Entrance
                         }
@@ -43,12 +40,10 @@ namespace DisarmedProtection
                 }
             },
             {
-                RoleTypeId.Scientist,
-                new()
+                RoleTypeId.Scientist, new()
                 {
                     {
-                        Team.ChaosInsurgency,
-                        new()
+                        Team.ChaosInsurgency, new()
                         {
                             FacilityZone.Entrance,
                             FacilityZone.Surface
